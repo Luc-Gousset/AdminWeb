@@ -4,15 +4,21 @@ stages:
   - test
 
 variables:
-  # Define your variables here, if needed
   MYSQL_DATABASE: root
   MYSQL_ROOT_PASSWORD: password
 
 before_script:
-  # Install dependencies
-  - apt update -yqq
-  - apt install -yqq git
+  # Update packages and install required software
+  - apt-get update -yqq
+  - apt-get install -yqq git unzip
+
+  # Install Composer
+  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+  # Install PHP extensions
   - docker-php-ext-install pdo_mysql
+
+  # Setup the application
   - cp .env.test .env
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
@@ -23,7 +29,7 @@ phpunit_test:
   services:
     - mariadb:latest
   script:
-    # Prepare environment
+    # Prepare the Symfony environment
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:create --env=test
     - php bin/console doctrine:fixtures:load -n --env=test
