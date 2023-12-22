@@ -30,6 +30,3 @@ phpunit_test:
 
     # Run PHPUnit tests
     - ./vendor/bin/phpunit --coverage-text
-  only:
-    - master
-    - merge_requests
