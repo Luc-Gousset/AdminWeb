@@ -30,8 +30,7 @@ phpunit_test:
       alias: mariadb
 
   script:
-    - apt-get install -yqq netcat
-    - while ! nc -z mariadb 3306; do sleep 1; done
+    - sleep 10
 
     # Prepare the Symfony environment
     - php bin/console doctrine:database:create --env=test
