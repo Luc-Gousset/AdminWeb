@@ -4,9 +4,6 @@ stages:
   - test
 
 variables:
-  MYSQL_PASSWORD: password
-  MYSQL_USER: root
-  MYSQL_DATABASE: recencement_population_test_test
   MYSQL_ALLOW_EMPTY_PASSWORD: 1
 
 before_script:
