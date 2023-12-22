@@ -38,4 +38,4 @@ phpunit_test:
     - php bin/console doctrine:fixtures:load -n --env=test
 
     # Run PHPUnit tests
-    - ./vendor/bin/phpunit --coverage-text
+    - ./vendor/bin/phpunit --coverage-text 
