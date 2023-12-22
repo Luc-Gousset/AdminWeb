@@ -19,7 +19,6 @@ before_script:
   - docker-php-ext-install pdo_mysql
 
   # Setup the application
-  - cp .env.test .env
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
 # PHPUnit Test
