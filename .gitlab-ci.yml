@@ -34,7 +34,7 @@ phpunit_test:
 
   script:
     - sleep 10
-
+    - telnet mariadb 3306
     # Prepare the Symfony environment
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:create --env=test
