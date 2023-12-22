@@ -4,8 +4,10 @@ stages:
   - test
 
 variables:
-  MYSQL_DATABASE: root
-  MYSQL_ROOT_PASSWORD: password
+  MYSQL_PASSWORD: password
+  MYSQL_USER: root
+  MYSQL_DATABASE: project
+  MYSQL_ALLOW_EMPTY_PASSWORD: 1
 
 before_script:
   # Update packages and install required software
