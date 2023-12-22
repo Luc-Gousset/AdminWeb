@@ -26,8 +26,19 @@ phpunit_test:
   stage: test
   image: php:8.2
   services:
-    - mariadb:latest
+    - name: mariadb:latest
+      alias: mariadb
+      command: ["--default-authentication-plugin=password"]
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: root
+        MYSQL_USER: root
+        MYSQL_PASSWORD: password
+
   script:
+    - apt-get install -yqq netcat
+    - while ! nc -z mariadb 3306; do sleep 1; done
+
     # Prepare the Symfony environment
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:create --env=test
