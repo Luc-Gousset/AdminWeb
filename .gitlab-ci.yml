@@ -14,7 +14,7 @@ before_script:
   # Update packages and install required software
   - apt-get update -yqq
   - apt-get install -yqq git unzip
-
+  - apt-get install telnet  
   # Install Composer
   - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
