@@ -4,7 +4,10 @@ stages:
   - test
 
 variables:
-  MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  MARIADB_ALLOW_EMPTY_PASSWORD: 1
+  MARIADB_USER: 'user'
+  MARIADB_PASSWORD: 'password'
+  MARIADB_ROOT_PASSWORD: 'password'
 
 before_script:
   # Update packages and install required software
