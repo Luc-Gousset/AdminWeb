@@ -1,21 +1,21 @@
-##Install Dependencies
+## Install Dependencies
 ```
 composer install
 ```
 
 
-##Database Setup
+## Database Setup
 ```
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 ```
 
-##Load Data Fixtures
+## Load Data Fixtures
 ```
 php bin/console doctrine:fixtures:load
 ```
 
-##Running Tests
+## Running Tests
 ```
 php bin/phpunit
 ```
