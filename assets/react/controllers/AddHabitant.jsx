@@ -37,10 +37,19 @@ export default function AddHabitant(props) {
                     toast.error("Habitant déjà existant !", {
                         position: toast.POSITION.TOP_CENTER
                     });
+                } else {
+                    toast.error("Données invalide UwU !", {
+                        position: toast.POSITION.TOP_CENTER
+                    });
+
                 }
             })
             .catch(function (error) {
                 console.log(error);
+                toast.error("Données invalide UwU !", {
+                    position: toast.POSITION.TOP_CENTER
+                });
+
             });
     };
 

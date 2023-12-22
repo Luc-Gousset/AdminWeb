@@ -1,0 +1,35 @@
+# .gitlab-ci.yml
+
+stages:
+  - test
+
+variables:
+  # Define your variables here, if needed
+  MYSQL_DATABASE: root
+  MYSQL_ROOT_PASSWORD: password
+
+before_script:
+  # Install dependencies
+  - apt-get update -yqq
+  - apt-get install -yqq git
+  - docker-php-ext-install pdo_mysql
+  - cp .env.test .env
+  - composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+# PHPUnit Test
+phpunit_test:
+  stage: test
+  image: php:7.4
+  services:
+    - mariadb:latest
+  script:
+    # Prepare environment
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:create --env=test
+    - php bin/console doctrine:fixtures:load -n --env=test
+
+    # Run PHPUnit tests
+    - ./vendor/bin/phpunit --coverage-text
+  only:
+    - master
+    - merge_requests

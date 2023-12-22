@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Habitant;
 use App\Entity\Adresse;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class HabitantController extends AbstractController
 {
@@ -39,9 +40,13 @@ class HabitantController extends AbstractController
     }
 
     #[Route('/habitant/add', name: 'app_habitant_create', methods: ['POST'])]
-    public function addHabitant(Request $request, EntityManagerInterface $entityManager, AdresseRepository $adresseRepository, HabitantRepository $habitantRepository): Response
+    public function addHabitant(Request $request, EntityManagerInterface $entityManager, AdresseRepository $adresseRepository, HabitantRepository $habitantRepository, ValidatorInterface $validator): Response
     {
         $data = json_decode($request->getContent(), true);
+        
+
+        //
+
 
         $numero = strtolower($data['numero_address']);
         $nomRue = strtolower($data['rue_address']);
@@ -78,6 +83,14 @@ class HabitantController extends AbstractController
         $habitant->setDateNaissance(new \DateTime($data['date_naissance']));
         $habitant->setGenre($data['genre']);
         $habitant->setAdresseHabitant($adresse);
+
+        $errors = $validator->validate($habitant);
+
+    
+        if (count($errors) > 0) {
+            return new JsonResponse(['status' => 'Habitant not valid'], Response::HTTP_NOT_ACCEPTABLE);
+        }
+
         $entityManager->persist($habitant);
 
         $entityManager->flush();
