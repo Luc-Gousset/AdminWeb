@@ -10,8 +10,8 @@ variables:
 
 before_script:
   # Install dependencies
-  - apt-get update -yqq
-  - apt-get install -yqq git
+  - apt update -yqq
+  - apt install -yqq git
   - docker-php-ext-install pdo_mysql
   - cp .env.test .env
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
