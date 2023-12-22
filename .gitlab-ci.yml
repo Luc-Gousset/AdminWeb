@@ -14,7 +14,6 @@ before_script:
   # Update packages and install required software
   - apt-get update -yqq
   - apt-get install -yqq git unzip
-  - apt-get install -yqq telnet  
   # Install Composer
   - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -33,8 +32,6 @@ phpunit_test:
       alias: mariadb
 
   script:
-    - sleep 10
-    - telnet mariadb 3306
     # Prepare the Symfony environment
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:create --env=test
