@@ -28,12 +28,6 @@ phpunit_test:
   services:
     - name: mariadb:latest
       alias: mariadb
-      command: ["--default-authentication-plugin=password"]
-      environment:
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: root
-        MYSQL_USER: root
-        MYSQL_PASSWORD: password
 
   script:
     - apt-get install -yqq netcat
