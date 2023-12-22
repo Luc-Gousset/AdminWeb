@@ -25,7 +25,7 @@ before_script:
 # PHPUnit Test
 phpunit_test:
   stage: test
-  image: php:7.4
+  image: php:8.2
   services:
     - mariadb:latest
   script:
